@@ -21,8 +21,10 @@
             <div class="sidebar-menu">
                 <a href="{% url 'dashboard:dashboard_page' %}" class="h5">Dashboard</a>
             </div>
-            <div class="sidebar-menu">
-                <a href="{% url 'dashboard:dashboard_page' %}" class="h5">Tutorial</a>
+            <div class="sidebar-logo-ukm">
+                <a href="{% url 'dashboard:dashboard_page' %}" class="h3">
+                    <img src="{% static 'dashboard/assets/logo-ukm.png' %}" class="sidebar-ukm"/>
+                </a>
             </div>
         </div>
         <div class="dashboard-container">
