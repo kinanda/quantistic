@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.css" rel="stylesheet"/>
+    <link href="{% static 'chatbot/css/style.css' %}" rel="stylesheet">
+    <title>Create Project</title>
+</head>
+<body>
+    <div class="chat-container"></div>
+    <div class="body-container">
+        <div class="form-container">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="btn-sm btn-success" value="Save">
+                <button type="button" class="btn-sm btn-primary">
+                    <a href="{% url 'dashboard:dashboard_page' %}" style="color:#ffffff; text-decoration:none">Dashboard</a>
+                </button>
+            </form>
+        </div>
+        <div class="map-container" id="map-container">
+            <img src="{% static 'chatbot/assets/map_0.png' %}">
+        </div>
+        <div class="desc-container" id="desc-container">
+        </div>
+    </div>
+
+    <div class="modal fade" id="message-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    
+    {% if messages %}        
+        <script>
+            var messageModal = new bootstrap.Modal(document.getElementById("message-modal"));
+            messageModal.show();
+        </script>
+    {% endif %}
+
+    <script src="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.js"/></script>
+    <script type="text/javascript">
+        var chatroom = new window.Chatroom({
+            host: "https://rasa.cranky-glitter-08329.pktriot.net",
+            title: "TemanKajianKu",
+            container: document.querySelector(".chat-container"),
+            welcomeMessage: "Type 'start' to begin",
+            speechRecognition: "en-US",
+            voiceLang: "en-US"
+        });
+        chatroom.openChat();
+    </script>
+
+    <script>
+        //let path = "{% with 'chatbot/assets/map_'|add:path|add:'.png' as image_static %}{% static image_static %}{% endwith %}";
+        //document.getElementById("map-container").innerHTML = `<img src="${path}">`;
+
+        const chatDiv = document.querySelector(".chats");
+        const config = { childList: true };
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(record => {
+                const chatText = record.addedNodes[0].lastChild.textContent;
+                if (chatText.includes("Type of question?"))
+                    updateContainer('1', `<img src="{% static 'chatbot/assets/map_1.png' %}">`, `{{desc.desc_1|safe}}`);
+                else if (chatText.includes("Do you have a true independent variable?"))
+                    updateContainer('11', `<img src="{% static 'chatbot/assets/map_11.png' %}">`, `{{desc.desc_11|safe}}`);
+                else if (chatText.includes("Regression Analysis"))
+                    updateContainer('111', `<img src="{% static 'chatbot/assets/map_111.png' %}">`, `{{desc.desc_111|safe}}`);
+                else if (chatText.includes("Correlation analysis?"))
+                    updateContainer('112', `<img src="{% static 'chatbot/assets/map_112.png' %}">`, `{{desc.desc_112|safe}}`);
+                else if (chatText.includes("Pearson's R"))
+                    updateContainer('1121', `<img src="{% static 'chatbot/assets/map_1121.png' %}">`, `{{desc.desc_1121|safe}}`);
+                else if (chatText.includes("Spearman's Rank Correlation"))
+                    updateContainer('1122', `<img src="{% static 'chatbot/assets/map_1122.png' %}">`, `{{desc.desc_1122|safe}}`);
+                else if (chatText.includes("Differences between what?"))
+                    updateContainer('12', `<img src="{% static 'chatbot/assets/map_12.png' %}">`, `{{desc.desc_12|safe}}`);
+                else if (chatText.includes("Fmax Test, Brown & Smythe's Test, Bartlett's Test"))
+                    updateContainer('121', `<img src="{% static 'chatbot/assets/map_121.png' %}">`, `{{desc.desc_121|safe}}`);
+                else if (chatText.includes("How many treatment groups?"))
+                    updateContainer('122', `<img src="{% static 'chatbot/assets/map_122.png' %}">`, `{{desc.desc_122|safe}}`);
+                else if (chatText.includes("Parametric assumptions satisfied?"))
+                    updateContainer('1221', `<img src="{% static 'chatbot/assets/map_1221.png' %}">`, `{{desc.desc_1221|safe}}`);
+                else if (chatText.includes("Student's Unpaired T-Test / Paired T-Test"))
+                    updateContainer('12211', `<img src="{% static 'chatbot/assets/map_12211.png' %}">`, `{{desc.desc_12211|safe}}`);
+                else if (chatText.includes("Data transforms worked?"))
+                    updateContainer('12212', `<img src="{% static 'chatbot/assets/map_12212.png' %}">`, `{{desc.desc_12212|safe}}`);
+                else if (chatText.includes("Student's Unpaired T-Test & Paired T-Test"))
+                    updateContainer('122121', `<img src="{% static 'chatbot/assets/map_122121.png' %}">`, `{{desc.desc_122121|safe}}`);
+                else if (chatText.includes("Mann-Whitney U or Wilcoxon Rank Sums Test"))
+                    updateContainer('122122', `<img src="{% static 'chatbot/assets/map_122122.png' %}">`, `{{desc.desc_122122|safe}}`);
+                else if (chatText.includes("Parametric assumption satisfied?"))
+                    updateContainer('1222', `<img src="{% static 'chatbot/assets/map_1222.png' %}">`, `{{desc.desc_1222|safe}}`);
+                else if (chatText.includes("ANOVA Test"))
+                    updateContainer('12221', `<img src="{% static 'chatbot/assets/map_12221.png' %}">`, `{{desc.desc_12221|safe}}`);
+                else if (chatText.includes("Data transform worked?"))
+                    updateContainer('12222', `<img src="{% static 'chatbot/assets/map_12222.png' %}">`, `{{desc.desc_12222|safe}}`);
+                else if (chatText.includes("ANOVA-Test"))
+                    updateContainer('122221', `<img src="{% static 'chatbot/assets/map_122221.png' %}">`, `{{desc.desc_122221|safe}}`);
+                else if (chatText.includes("Kruskal-Wallis Test"))
+                    updateContainer('122222', `<img src="{% static 'chatbot/assets/map_122222.png' %}">`, `{{desc.desc_122222|safe}}`);
+                else if (chatText.includes("Chi-square tests one and two sample"))
+                    updateContainer('2', `<img src="{% static 'chatbot/assets/map_2.png' %}">`, `{{desc.desc_2|safe}}`);
+            });
+        });
+        observer.observe(chatDiv, config);
+
+        let path = "{{path}}";
+        if (path !== '') {
+            if (path === '0') {
+                queueChat('start', 1);
+            }
+            else if (path === '1') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+            }
+            else if (path === '11') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Relationships', 3);
+            }
+            else if (path === '111') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Relationships', 3);
+                queueChat('Yes, it is', 4);
+            }
+            else if (path === '112') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Relationships', 3);
+                queueChat('No, it is not', 4);
+            }
+            else if (path === '1121') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Relationships', 3);
+                queueChat('No, it is not', 4);
+                queueChat('Parametric', 5);
+            }
+            else if (path === '1122') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Relationships', 3);
+                queueChat('No, it is not', 4);
+                queueChat('Non-parametric', 5);
+            }
+            else if (path === '12') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+            }
+            else if (path === '121') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Tests for equal variances', 4);
+            }
+            else if (path === '122') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+            }
+            else if (path === '1221') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('Two groups', 5);
+            }
+            else if (path === '12211') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('Two groups', 5);
+                queueChat('Yes, it is', 6);
+            }
+            else if (path === '12212') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('Two groups', 5);
+                queueChat('No, it is not', 6);
+            }
+            else if (path === '122121') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('Two groups', 5);
+                queueChat('No, it is not', 6);
+                queueChat('Yes, it is', 7);
+            }
+            else if (path === '122122') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('Two groups', 5);
+                queueChat('No, it is not', 6);
+                queueChat('No, it is not', 7);
+            }
+            else if (path === '1222') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('More than two groups', 5);
+            }
+            else if (path === '12221') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('More than two groups', 5);
+                queueChat('Yes, it is', 6);
+            }
+            else if (path === '12222') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('More than two groups', 5);
+                queueChat('No, it is not', 6);
+            }
+            else if (path === '122221') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('More than two groups', 5);
+                queueChat('No, it is not', 6);
+                queueChat('Yes, it is', 7);
+            }
+            else if (path === '122222') {
+                queueChat('start', 1);
+                queueChat('Continuous', 2);
+                queueChat('Differences', 3);
+                queueChat('Means', 4);
+                queueChat('More than two groups', 5);
+                queueChat('No, it is not', 6);
+                queueChat('No, it is not', 7);
+            }
+            else if (path === '2') {
+                queueChat('start', 1);
+                queueChat('Discrete, categorical', 2);
+            }
+        }
+
+        function updateContainer(path, img, desc) {
+            fadeOut();
+            setTimeout(() => {
+                document.getElementById("id_project_path").value = path;
+                document.getElementById("map-container").innerHTML = img;
+                document.getElementById("desc-container").innerHTML = desc;
+                fadeIn();
+            }, 300);
+        }
+
+        function queueChat(strInput, queueNumber) {
+            let sleep = [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000];
+            setTimeout(() => {
+                submitChat(strInput);
+            }, sleep[queueNumber]);
+        }
+
+        function submitChat(strInput) {
+            document.querySelectorAll("input")[0].value = strInput;
+            document.querySelectorAll("input")[1].click();
+        }
+
+        function fadeOut() {
+            document.querySelector('#map-container').style.opacity = 0;
+            document.querySelector('#desc-container').style.opacity = 0;
+        }
+
+        function fadeIn() {
+            document.querySelector('#map-container').style.opacity = 1;
+            document.querySelector('#desc-container').style.opacity = 1;
+        }
+    </script>
+</body>
+</html>

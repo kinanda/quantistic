@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link href="{% static 'dashboard/css/style.css' %}" rel="stylesheet">
+        <title>Dashboard</title>
+    </head>
+    <body>
+        <div class="dashboard-sidebar">
+            <div class="sidebar-logo">
+                <a href="{% url 'dashboard:dashboard_page' %}" class="h3">
+                    <img src="{% static 'accounts/assets/mascot.png' %}" class="sidebar-img"/>
+                </a>
+            </div>
+            <div class="sidebar-logo">
+                <a href="{% url 'dashboard:dashboard_page' %}" class="h3">TemanKajianKu</a>
+            </div>
+            <div class="sidebar-menu">
+                <a href="{% url 'dashboard:dashboard_page' %}" class="h5">Dashboard</a>
+            </div>
+            <div class="sidebar-menu">
+                <a href="{% url 'dashboard:dashboard_page' %}" class="h5">Tutorial</a>
+            </div>
+        </div>
+        <div class="dashboard-container">
+            <div class="dashboard-title">
+                <h3>Dashboard</h3>
+                <a href="{% url 'accounts:logout_page' %}" class="btn btn-danger">Log Out</a>
+            </div>
+
+            <div class="dashboard-header">
+                <h4>Welcome, {{ user.username }}!</h4>
+                <p>You have <b>{{ projects.count|add:sampling_projects.count }} </b> projects</p>
+            </div>
+
+            <div class="dashboard-body">
+                <div class="sampling-section">
+                    <div class="project-title">
+                        <h5>Sampling Analysis</h5>
+                        <a href="{% url 'chatbot:create_project_page' %}" class="btn btn-primary">Create New</a>
+                    </div>
+
+                    <table class="table project-table">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col">Project Name</th>
+                                <th scope="col">Last Edited</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Sampling Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for project in sampling_projects %}
+                            <tr>
+                                <td>{{ project.name }}</td>
+                                <td>{{ project.modified|date:"d/m/Y H:i:s" }}</td>
+                                <td>
+                                    <a href="{% url 'chatbot:edit_project_page' project.pk %}">Edit</a>
+                                    <a href="{% url 'chatbot:delete_project_page' project.pk %}">Delete</a>
+                                </td>
+                                {% if project.flowchart.method.name|length >= 1 %}
+                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-complete.png' %}">{{ project.flowchart.method.name }}</td>
+                                {% else %}
+                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-progress.png' %}">. . .</td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="statistical-section">
+                    <div class="project-title">
+                        <h5>Statistical Analysis</h5>
+                        <a href="{% url 'chatbot:create_project_page' %}" class="btn btn-primary">Create New</a>
+                    </div>
+
+                    <table class="table project-table">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col">Project Name</th>
+                                <th scope="col">Last Edited</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Statistical Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for project in projects %}
+                            <tr>
+                                <td>{{ project.name }}</td>
+                                <td>{{ project.modified|date:"d/m/Y H:i:s" }}</td>
+                                <td>
+                                    <a href="{% url 'chatbot:edit_project_page' project.pk %}">Edit</a>
+                                    <a href="{% url 'chatbot:delete_project_page' project.pk %}">Delete</a>
+                                </td>
+                                {% if project.flowchart.method.name|length >= 1 %}
+                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-complete.png' %}">{{ project.flowchart.method.name }}</td>
+                                {% else %}
+                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-progress.png' %}">. . .</td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="message-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Notification</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        
+        {% if messages %}        
+            <script>
+                var messageModal = new bootstrap.Modal(document.getElementById("message-modal"));
+                messageModal.show();
+            </script>
+        {% endif %}
+    </body>
+</html>

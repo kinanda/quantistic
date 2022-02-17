@@ -1,0 +1,64 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: gainsboro;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.container {
+    margin: auto;
+}
+
+.header-container h1 {
+    color: dodgerblue;
+}
+
+.header-image {
+    max-width: 300px;
+}
+
+.form-container {
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.form-container a {
+    margin-top: 16px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.error-message {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    color: red;
+}
+
+.user-form {
+    display: block;
+    overflow: auto;
+    background-color: white;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.user-submit {
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+}
+
+.footer-container {
+    margin-top: 20px;
+}
