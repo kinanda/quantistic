@@ -40,7 +40,7 @@
                 <div class="sampling-section">
                     <div class="project-title">
                         <h5>Sampling Analysis</h5>
-                        <a href="{% url 'chatbot:create_project_page' %}" class="btn btn-primary">Create New</a>
+                        <a href="{% url 'chatbot:create_sampling_project_page' %}" class="btn btn-primary">Create New</a>
                     </div>
 
                     <table class="table project-table">
@@ -58,8 +58,8 @@
                                 <td>{{ project.name }}</td>
                                 <td>{{ project.modified|date:"d/m/Y H:i:s" }}</td>
                                 <td>
-                                    <a href="{% url 'chatbot:edit_project_page' project.pk %}">Edit</a>
-                                    <a href="{% url 'chatbot:delete_project_page' project.pk %}">Delete</a>
+                                    <a href="{% url 'chatbot:edit_sampling_project_page' project.pk %}">Edit</a>
+                                    <a href="{% url 'chatbot:delete_sampling_project_page' project.pk %}">Delete</a>
                                 </td>
                                 {% if project.flowchart.method.name|length >= 1 %}
                                     <td><img class="small-icon" src="{% static 'dashboard/assets/icon-complete.png' %}">{{ project.flowchart.method.name }}</td>

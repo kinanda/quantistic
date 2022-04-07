@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.css" rel="stylesheet"/>
+    <link href="{% static 'chatbot/css/style.css' %}" rel="stylesheet">
+    <title>Create Project</title>
+</head>
+<body>
+    <div class="chat-container"></div>
+    <div class="body-container">
+        <div class="form-container">
+            <form action="/sampling-projects/create/" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="btn-sm btn-success" value="Save">
+                <button type="button" class="btn-sm btn-primary">
+                    <a href="{% url 'dashboard:dashboard_page' %}" style="color:#ffffff; text-decoration:none">Dashboard</a>
+                </button>
+            </form>
+        </div>
+        <div class="map-container" id="map-container">
+            <img src="{% static 'chatbot/assets/sampling_map_0.jpg' %}">
+        </div>
+        <div class="desc-container" id="desc-container">
+        </div>
+    </div>
+
+    <div class="modal fade" id="message-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    
+    {% if messages %}        
+        <script>
+            var messageModal = new bootstrap.Modal(document.getElementById("message-modal"));
+            messageModal.show();
+        </script>
+    {% endif %}
+
+    <script src="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.js"/></script>
+    <script type="text/javascript">
+        var chatroom = new window.Chatroom({
+            host: "https://rasa.cranky-glitter-08329.pktriot.net",
+            title: "TemanKajianKu",
+            container: document.querySelector(".chat-container"),
+            welcomeMessage: "Type 'begin' to start",
+            speechRecognition: "en-US",
+            voiceLang: "en-US"
+        });
+        chatroom.openChat();
+    </script>
+
+    <script>
+        document.querySelectorAll("input")[0].value = 'begin';
+        
+        const chatDiv = document.querySelector(".chats");
+        const config = { childList: true };
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(record => {
+                const chatText = record.addedNodes[0].lastChild.textContent;
+                
+                if (chatText.includes("Type of probability?"))
+                    updateContainer('0', `<img src="{% static 'chatbot/assets/sampling_map_0.jpg' %}">`, `{{desc.desc_zero|safe}}`);
+                else if (chatText.includes("Non-probability method"))
+                    updateContainer('a', `<img src="{% static 'chatbot/assets/sampling_map_a.jpg' %}">`, `{{desc.desc_a|safe}}`);
+                else if (chatText.includes("Convenience method"))
+                    updateContainer('aa', `<img src="{% static 'chatbot/assets/sampling_map_aa.jpg' %}">`, `{{desc.desc_aa|safe}}`);
+                else if (chatText.includes("Quota samples"))
+                    updateContainer('ab', `<img src="{% static 'chatbot/assets/sampling_map_ab.jpg' %}">`, `{{desc.desc_ab|safe}}`);
+                else if (chatText.includes("Judgemental samples"))
+                    updateContainer('ac', `<img src="{% static 'chatbot/assets/sampling_map_ac.jpg' %}">`, `{{desc.desc_ac|safe}}`);
+                if (chatText.includes("Probability method"))
+                    updateContainer('b', `<img src="{% static 'chatbot/assets/sampling_map_b.jpg' %}">`, `{{desc.desc_b|safe}}`);
+                else if (chatText.includes("Stratified sampling"))
+                    updateContainer('ba', `<img src="{% static 'chatbot/assets/sampling_map_ba.jpg' %}">`, `{{desc.desc_ba|safe}}`);
+                else if (chatText.includes("Simple Random sampling"))
+                    updateContainer('bb', `<img src="{% static 'chatbot/assets/sampling_map_bb.jpg' %}">`, `{{desc.desc_bb|safe}}`);
+                else if (chatText.includes("Cluster sampling"))
+                    updateContainer('bc', `<img src="{% static 'chatbot/assets/sampling_map_bc.jpg' %}">`, `{{desc.desc_bc|safe}}`);
+            });
+        });
+        observer.observe(chatDiv, config);
+
+        function updateContainer(path, img, desc) {
+            fadeOut();
+            setTimeout(() => {
+                document.getElementById("id_project_path").value = path;
+                document.getElementById("map-container").innerHTML = img;
+                document.getElementById("desc-container").innerHTML = desc;
+                fadeIn();
+            }, 300);
+        }
+
+        function queueChat(strInput, queueNumber) {
+            let sleep = [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000];
+            setTimeout(() => {
+                submitChat(strInput);
+            }, sleep[queueNumber]);
+        }
+
+        function submitChat(strInput) {
+            document.querySelectorAll("input")[0].value = strInput;
+            document.querySelectorAll("input")[1].click();
+        }
+
+        function fadeOut() {
+            document.querySelector('#map-container').style.opacity = 0;
+            document.querySelector('#desc-container').style.opacity = 0;
+        }
+
+        function fadeIn() {
+            document.querySelector('#map-container').style.opacity = 1;
+            document.querySelector('#desc-container').style.opacity = 1;
+        }
+    </script>
+</body>
+</html>

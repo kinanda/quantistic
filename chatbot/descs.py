@@ -383,4 +383,50 @@ Statistical difference refers to significant differences between groups of objec
     that you would see if the null hypothesis is true.
 </p>
     """,
+    'desc_zero': """
+<h3>Non-Probability Methods</h3>
+<p>Non-Probability Methods description.</p>
+<h3>Probability Methods</h3>
+<p>Probability Methods description.</p>
+    """,
+    'desc_a': """
+<h3>Convenience Method</h3>
+<p>Convenience Method description.</p>
+<h3>Quota Samples</h3>
+<p>Quota Samples description.</p>
+<h3>Judgemental Samples</h3>
+<p>Judgemental Samples description.</p>
+    """,
+    'desc_aa': """
+<h3>Convenience Method</h3>
+<p>Convenience Method description.</p>
+    """,
+    'desc_ab': """
+<h3>Quota Samples</h3>
+<p>Quota Samples description.</p>
+    """,
+    'desc_ac': """
+<h3>Judgemental Samples</h3>
+<p>Judgemental Samples description.</p>
+    """,
+    'desc_b': """
+<h3>Stratified Sampling</h3>
+<p>Stratified Sampling description.</p>
+<h3>Simple Random Sampling</h3>
+<p>Simple Random Sampling description.</p>
+<h3>Cluster Sampling</h3>
+<p>Cluster Sampling description.</p>
+    """,
+    'desc_ba': """
+<h3>Stratified Sampling</h3>
+<p>Stratified Sampling description.</p>
+    """,
+    'desc_bb': """
+<h3>Simple Random Sampling</h3>
+<p>Simple Random Sampling description.</p>
+    """,
+    'desc_bc': """
+<h3>Cluster Sampling</h3>
+<p>Cluster Sampling description.</p>
+    """,
   })
