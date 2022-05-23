@@ -49,6 +49,7 @@
                                 <th scope="col">Project Name</th>
                                 <th scope="col">Last Edited</th>
                                 <th scope="col">Action</th>
+                                <th scope="col-sm">&nbsp;</th>
                                 <th scope="col">Sampling Method</th>
                             </tr>
                         </thead>
@@ -62,9 +63,17 @@
                                     <a href="{% url 'chatbot:delete_sampling_project_page' project.pk %}">Delete</a>
                                 </td>
                                 {% if project.flowchart.method.name|length >= 1 %}
-                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-complete.png' %}">{{ project.flowchart.method.name }}</td>
+                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-complete.png' %}"></td>
+                                    <td>
+                                        {{ project.flowchart.method.name }}
+                                    </td>
                                 {% else %}
-                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-progress.png' %}">. . .</td>
+                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-progress.png' %}"></td>
+                                    <td>
+                                        <div class="progress" style="height: 23px; width:150px;">
+                                            <div class="progress-bar w-{{ project.progress }}" role="progressbar" >{{ project.progress }}%</div>
+                                        </div>
+                                    </td>
                                 {% endif %}
                             </tr>
                             {% endfor %}
@@ -83,6 +92,7 @@
                                 <th scope="col">Project Name</th>
                                 <th scope="col">Last Edited</th>
                                 <th scope="col">Action</th>
+                                <th scope="col-sm">&nbsp;</th>
                                 <th scope="col">Statistical Method</th>
                             </tr>
                         </thead>
@@ -96,9 +106,17 @@
                                     <a href="{% url 'chatbot:delete_project_page' project.pk %}">Delete</a>
                                 </td>
                                 {% if project.flowchart.method.name|length >= 1 %}
-                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-complete.png' %}">{{ project.flowchart.method.name }}</td>
+                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-complete.png' %}"></td>
+                                    <td>
+                                        {{ project.flowchart.method.name }}
+                                    </td>
                                 {% else %}
-                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-progress.png' %}">. . .</td>
+                                    <td><img class="small-icon" src="{% static 'dashboard/assets/icon-progress.png' %}"></td>
+                                    <td>
+                                        <div class="progress" style="height: 23px; width:150px;">
+                                            <div class="progress-bar w-{{ project.progress }}" role="progressbar" >{{ project.progress }}%</div>
+                                        </div>
+                                    </td>
                                 {% endif %}
                             </tr>
                             {% endfor %}

@@ -20,11 +20,23 @@ def create_project_page(request):
                 project_name = 'Untitled Project'
             project_path = form.cleaned_data['project_path']
             project_flowchart = Flowchart.objects.filter(path=project_path).first()
+
+            project_progress = 0
+            if project.flowchart.method.name.length >= 1:
+                project_progress = 100
+            elif project_path.length >= 3:
+                project_progress = 75
+            elif project_path.length >= 2:
+                project_progress = 50
+            elif project_path.length >= 1:
+                project_progress = 25
+
             project = Project.objects.create(
                 name=project_name,
                 owner=request.user,
                 path=project_path,
                 flowchart=project_flowchart,
+                progress=project_progress,
             )
             project.save()
             message = "Project saved."
@@ -53,10 +65,22 @@ def edit_project_page(request, project_id):
                 project_name = 'Untitled Project'
             project_path = form.cleaned_data['project_path']
             project_flowchart = Flowchart.objects.filter(path=project_path).first()
+
+            project_progress = 0
+            if project.flowchart.method.name.length >= 1:
+                project_progress = 100
+            elif project_path.length >= 3:
+                project_progress = 75
+            elif project_path.length >= 2:
+                project_progress = 50
+            elif project_path.length >= 1:
+                project_progress = 25
+
             Project.objects.filter(id=project_id).update(
                 name=project_name,
                 path=project_path,
-                flowchart=project_flowchart
+                flowchart=project_flowchart,
+                progress=project_progress,
             )
             message = "Project saved."
             messages.add_message(request, messages.INFO, message)
@@ -98,11 +122,23 @@ def create_sampling_project_page(request):
                 project_name = 'Untitled Project'
             project_path = form.cleaned_data['project_path']
             project_flowchart = SamplingFlowchart.objects.filter(path=project_path).first()
+
+            project_progress = 0
+            if project.flowchart.method.name.length >= 1:
+                project_progress = 100
+            elif project_path.length >= 3:
+                project_progress = 75
+            elif project_path.length >= 2:
+                project_progress = 50
+            elif project_path.length >= 1:
+                project_progress = 25
+
             project = SamplingProject.objects.create(
                 name=project_name,
                 owner=request.user,
                 path=project_path,
                 flowchart=project_flowchart,
+                progress=project_progress,
             )
             project.save()
             message = "Project saved."
@@ -131,10 +167,22 @@ def edit_sampling_project_page(request, project_id):
                 project_name = 'Untitled Project'
             project_path = form.cleaned_data['project_path']
             project_flowchart = SamplingFlowchart.objects.filter(path=project_path).first()
+
+            project_progress = 0
+            if project.flowchart.method.name.length >= 1:
+                project_progress = 100
+            elif project_path.length >= 3:
+                project_progress = 75
+            elif project_path.length >= 2:
+                project_progress = 50
+            elif project_path.length >= 1:
+                project_progress = 25
+
             Project.objects.filter(id=project_id).update(
                 name=project_name,
                 path=project_path,
-                flowchart=project_flowchart
+                flowchart=project_flowchart,
+                progress=project_progress,
             )
             message = "Project saved."
             messages.add_message(request, messages.INFO, message)
