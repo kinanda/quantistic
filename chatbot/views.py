@@ -22,13 +22,15 @@ def create_project_page(request):
             project_flowchart = Flowchart.objects.filter(path=project_path).first()
 
             project_progress = 0
-            if project.flowchart.method.name.length >= 1:
-                project_progress = 100
-            elif project_path.length >= 3:
+            if project_flowchart is not None:
+                if project_flowchart.method is not None:
+                    if len(project_flowchart.method.name) >= 1:
+                        project_progress = 100
+            elif len(project_path) >= 3:
                 project_progress = 75
-            elif project_path.length >= 2:
+            elif len(project_path) >= 2:
                 project_progress = 50
-            elif project_path.length >= 1:
+            elif len(project_path) >= 1:
                 project_progress = 25
 
             project = Project.objects.create(
@@ -67,13 +69,15 @@ def edit_project_page(request, project_id):
             project_flowchart = Flowchart.objects.filter(path=project_path).first()
 
             project_progress = 0
-            if project.flowchart.method.name.length >= 1:
-                project_progress = 100
-            elif project_path.length >= 3:
+            if project_flowchart is not None:
+                if project_flowchart.method is not None:
+                    if len(project_flowchart.method.name) >= 1:
+                        project_progress = 100
+            elif len(project_path) >= 3:
                 project_progress = 75
-            elif project_path.length >= 2:
+            elif len(project_path) >= 2:
                 project_progress = 50
-            elif project_path.length >= 1:
+            elif len(project_path) >= 1:
                 project_progress = 25
 
             Project.objects.filter(id=project_id).update(
@@ -124,13 +128,15 @@ def create_sampling_project_page(request):
             project_flowchart = SamplingFlowchart.objects.filter(path=project_path).first()
 
             project_progress = 0
-            if project.flowchart.method.name.length >= 1:
-                project_progress = 100
-            elif project_path.length >= 3:
+            if project_flowchart is not None:
+                if project_flowchart.method is not None:
+                    if len(project_flowchart.method.name) >= 1:
+                        project_progress = 100
+            elif len(project_path) >= 3:
                 project_progress = 75
-            elif project_path.length >= 2:
+            elif len(project_path) >= 2:
                 project_progress = 50
-            elif project_path.length >= 1:
+            elif len(project_path) >= 1:
                 project_progress = 25
 
             project = SamplingProject.objects.create(
@@ -169,13 +175,15 @@ def edit_sampling_project_page(request, project_id):
             project_flowchart = SamplingFlowchart.objects.filter(path=project_path).first()
 
             project_progress = 0
-            if project.flowchart.method.name.length >= 1:
-                project_progress = 100
-            elif project_path.length >= 3:
+            if project_flowchart is not None:
+                if project_flowchart.method is not None:
+                    if len(project_flowchart.method.name) >= 1:
+                        project_progress = 100
+            elif len(project_path) >= 3:
                 project_progress = 75
-            elif project_path.length >= 2:
+            elif len(project_path) >= 2:
                 project_progress = 50
-            elif project_path.length >= 1:
+            elif len(project_path) >= 1:
                 project_progress = 25
 
             Project.objects.filter(id=project_id).update(
