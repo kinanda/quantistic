@@ -1,24 +1,30 @@
-# Important
-Only install Python 3.8<br/>
-Only install Rasa 2.8.6<br/>
+# Prerequisites
+- Only install Python 3.8.x (manual installation; download and install at python website)<br/>
+- Only install Rasa 2.8.6 (automatic installation; ignore this)<br/><br/>
+- Open 2 instances of VSCode:<br/>
+  - VSCode #1 for rasa
+  - VSCode #2 for quantistic<br/><br/>
 
-# How to install rasa project
-cd C:\Users\Kinanda\Documents\Django\rasa<br/>
+# Setup Step #1: Install rasa project (VSCode #1 Terminal)
+- Copy paste line by line into terminal, wait until each command finish:<br/><br/>
+cd C:\Users\Kinanda\Documents\Django\rasa (replace with your rasa path)<br/>
 python -m venv env<br/>
 .\env\Scripts\activate<br/>
 pip install --upgrade pip<br/>
-pip install -r .\requirements.txt<br/>
+pip install -r .\requirements.txt<br/><br/>
 
-# How to install quantistic project
-cd C:\Users\Kinanda\Documents\Django\quantistic<br/>
+# Setup Step #2: Install quantistic project (VSCode #2 Terminal)
+- Copy paste line by line into terminal, wait until each command finish:<br/><br/>
+cd C:\Users\Kinanda\Documents\Django\quantistic (replace with your quantistic path)<br/>
 python -m venv env<br/>
 .\env\Scripts\activate<br/>
 pip install --upgrade pip<br/>
 pip install -r .\requirements.txt<br/>
 python manage.py migrate<br/>
-python manage.py createsuperuser<br/>
+python manage.py createsuperuser<br/><br/>
 
-# How to setup quantistic database
+# Setup Step #3: Initialize quantistic database (VSCode #2 Terminal)
+- Copy paste all lines into terminal:<br/><br/>
 python manage.py shell<br/>
 from chatbot.models import Method, Flowchart, SamplingMethod, SamplingFlowchart<br/>
 method1 = Method(name="Chi-Square Test One and Two Sample", description="Chi-Square Test One and Two Sample")<br/>
@@ -85,25 +91,30 @@ sflowchart3.save()<br/>
 sflowchart4.save()<br/>
 sflowchart5.save()<br/>
 sflowchart6.save()<br/>
-quit()<br/>
+quit()<br/><br/>
 
-# How to start Django app
-cd C:\Users\Kinanda\Documents\Django\quantistic<br/>
-.\env\Scripts\activate<br/>
-python .\manage.py runserver 127.0.0.1:8080<br/>
-
-# How to start Rasa app
-cd C:\Users\Kinanda\Documents\Django\rasa<br/>
+# Run Step #1: Start rasa app (VSCode #1 Terminal)
+- Copy paste line by line into terminal, wait until each command finish:<br/><br/>
+cd C:\Users\Kinanda\Documents\Django\rasa (replace with your rasa path)<br/>
+python -m venv env<br/>
 .\env\Scripts\activate<br/>
 rasa train<br/>
-rasa run --credentials ./credentials.yml  --enable-api --model ./models --endpoints ./endpoints.yml --cors "*"<br/>
+rasa run --credentials ./credentials.yml  --enable-api --model ./models --endpoints ./endpoints.yml --cors "*"<br/><br/>
 
-# How to access Django app
-access app via browser: http://127.0.0.1:8080/<br/>
-access admin via browser: http://127.0.0.1:8080/admin<br/>
+# Run Step #2: Start quantistic app (Open VSCode #2 Terminal)
+- Copy paste line by line into terminal, wait until each command finish:<br/><br/>
+cd C:\Users\Kinanda\Documents\Django\quantistic (replace with your quantistic path)<br/>
+.\env\Scripts\activate<br/>
+python .\manage.py runserver 127.0.0.1:8080<br/><br/>
 
-# Command to implement Django migrations
+# Run Step #3: How to access app
+- access app via browser: http://127.0.0.1:8080/<br/>
+- access admin dashboard via browser: http://127.0.0.1:8080/admin<br/><br/>
+
+# Extra Tips: Command to implement Django migrations
+- In case you want to change database model, you need to create and apply a migration<br/>
+- Copy paste line by line into terminal, wait until each command finish:<br/><br/>
 python .\manage.py makemigrations accounts --name insert_migration_name_here<br/>
 python .\manage.py makemigrations chatbot --name insert_migration_name_here<br/>
 python .\manage.py makemigrations dashboard --name insert_migration_name_here<br/>
-python manage.py migrate<br/>
+python manage.py migrate<br/><br/>
