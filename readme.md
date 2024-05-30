@@ -22,3 +22,4 @@ python .\manage.py runserver<br/><br/>
 # Optional: Packetriot command
 - Copy paste line by line into cmd:<br/><br/>
 C:\Users\Kinanda\Documents\Packetriot\pktriot.exe --config C:\Users\Kinanda\.pktriot\config.json start<br/><br/>
+- Access app via browser: https://amazing-lake-73054.pktriot.net/<br/><br/>
