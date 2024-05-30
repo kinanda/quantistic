@@ -7,7 +7,9 @@ app_name = "dashboard"
 urlpatterns = [
     path(
         "",
-        views.dashboard_page,
-        name="dashboard_page",
+        #views.dashboard_page,
+        #name="dashboard_page",
+        views.perasmian_page, #AISC09
+        name="perasmian_page", #AISC09
     )
 ]

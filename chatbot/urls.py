@@ -44,5 +44,10 @@ urlpatterns = [
         "sampling-projects/<str:project_id>/delete",
         views.delete_sampling_project_page,
         name="delete_sampling_project_page",
+    ),
+    path(
+        "perasmian/",
+        views.perasmian_page,
+        name="perasmian_page",
     )
 ]

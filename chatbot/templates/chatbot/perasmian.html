@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!--<link href="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.css" rel="stylesheet"/>-->
+    <!--<link href="https://chatroom.cranky-glitter-08329.pktriot.net/dist/Chatroom.css" rel="stylesheet"/>-->
+    <link href="{% static 'chatbot/css/Chatroom.css' %}" rel="stylesheet">
+    <link href="{% static 'chatbot/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'chatbot/css/perasmian.css' %}" rel="stylesheet">
+    <title>AI Summer Camp 2024</title>
+</head>
+<body class="perasmian-body">
+    <div class="perasmian-side-container" id="sideContainer">
+      <img class="perasmian-logo" src="{% static 'chatbot/assets/bg-aisc.jpg' %}">
+    </div>
+
+    <div class="perasmian-chat-container" id="chatContainer">
+      <div class="chat-header">
+        <div class="perasmian-bot-pic">
+          <img onclick="entot()" src="{% static 'chatbot/assets/bot-pic.png' %}">
+        </div>
+        <div class="perasmian-bot-name">AISYAH</div>
+      </div>
+      <div class="chat-body"></div>
+    </div>
+
+    <div class="perasmian-video-container" id="videoContainer"></div>
+
+    <div class="modal fade" id="message-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    
+    {% if messages %}        
+        <script>
+            var messageModal = new bootstrap.Modal(document.getElementById("message-modal"));
+            messageModal.show();
+        </script>
+    {% endif %}
+
+    <!--<script src="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.js"/></script>-->
+    <!--<script src="https://chatroom.cranky-glitter-08329.pktriot.net/dist/Chatroom.js"/></script>-->
+    <script src="{% static 'chatbot/js/Chatroom.js' %}"/></script>
+
+    <script type="text/javascript">
+        var chatroom = new window.Chatroom({
+            host: "http://localhost:5005",
+            title: "AI Summer Camp 2024",
+            container: document.querySelector(".chat-body"),
+            welcomeMessage: "",
+            speechRecognition: null,
+            voiceLang: null
+        });
+        chatroom.openChat();
+    </script>
+
+    <script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('videoContainer', {
+          videoId: 'jw3jjN8kCyo',
+          playerVars: {
+            'playsinline': 1
+          },
+        });
+      }
+    </script>
+
+    <script>
+        function entot() {
+          const bot1 = "Mohon perkenan DYMM Tuanku Pemangku Raja Perlis untuk menaip singkatan nama \"AiSC09\" sebagai simbolik pembukaan.";
+          setTimeout(() => {
+            chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: bot1}));
+          }, 0);
+          setTimeout(() => {
+            var audio = new Audio("{% static 'chatbot/assets/bot1.wav' %}");
+            audio.play();
+            // document.querySelectorAll("input")[0].value = "AiSC09";
+          }, 1000);
+        }
+        
+        const chatDiv = document.querySelector(".chats");
+        const config = { childList: true };
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(record => {
+              if (record.addedNodes[0]) {
+                const chatText = record.addedNodes[0].lastChild.textContent;
+                const bot2 = "Program AI Summer Camp 09 - University Tour adalah program reskilling dan upskilling dengan memberi tumpuan kepada kesediaan dan kebolehpasaran bakal graduan khususnya anak-anak Perlis dalam bidang Kecerdasan Buatan iaitu AI untuk menghadapi dunia pekerjaan yang semakin mencabar dan dinamik.";
+                const bot3 = "Persembahan video pembukaan akan dimulakan dalam kiraan:";
+                const countdownTime = 26000;
+                if (chatText) {
+                  if (
+                    chatText.toLowerCase() == "aisc2024" ||
+                    chatText.toLowerCase() == "aisc 2024" ||
+                    chatText.toLowerCase() == "aisc09" ||
+                    chatText.toLowerCase() == "aisc 09"
+                  ) {
+                    setTimeout(() => {
+                      chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: bot2}));
+                    }, 0);
+                    setTimeout(() => {
+                      var audio = new Audio("{% static 'chatbot/assets/bot2.wav' %}");
+                      audio.play();
+                    }, 1000);
+
+                    setTimeout(() => {
+                      chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: bot3}));
+                    }, 21000);
+                    setTimeout(() => {
+                      var audio = new Audio("{% static 'chatbot/assets/bot3.wav' %}");
+                      audio.play();
+                    }, 22000);
+
+                    setTimeout(() => {
+                      chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: '3'}));
+                    }, countdownTime);
+                    setTimeout(() => {
+                      var audio = new Audio("{% static 'chatbot/assets/countdown3.wav' %}");
+                      audio.play();
+                    }, countdownTime + 1000);
+
+                    setTimeout(() => {
+                      chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: '2'}));
+                    }, countdownTime + 2000);
+                    setTimeout(() => {
+                      var audio = new Audio("{% static 'chatbot/assets/countdown2.wav' %}");
+                      audio.play();
+                    }, countdownTime + 3000);
+
+                    setTimeout(() => {
+                      chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: '1'}));
+                    }, countdownTime + 4000);
+                    setTimeout(() => {
+                      var audio = new Audio("{% static 'chatbot/assets/countdown1.wav' %}");
+                      audio.play();
+                    }, countdownTime + 5000);
+
+                    setTimeout(() => {
+                      document.getElementById("sideContainer").style.display = "none";
+                      document.getElementById("chatContainer").style.display = "none";
+                      document.getElementById("videoContainer").style.display = "block";
+                      player.playVideo();
+                    }, countdownTime + 7000);
+                  }
+                }
+              }
+            });
+        });
+        observer.observe(chatDiv, config);
+
+        function updateContainer(path, img, desc) {
+            fadeOut();
+            setTimeout(() => {
+                document.getElementById("id_project_path").value = path;
+                document.getElementById("map-container").innerHTML = img;
+                document.getElementById("desc-container").innerHTML = desc;
+                fadeIn();
+            }, 300);
+        }
+
+        function queueChat(strInput, queueNumber) {
+            let sleep = [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000];
+            setTimeout(() => {
+                submitChat(strInput);
+            }, sleep[queueNumber]);
+        }
+
+        function submitChat(strInput) {
+            document.querySelectorAll("input")[0].value = strInput;
+            document.querySelectorAll("input")[1].click();
+        }
+
+        function fadeOut() {
+            document.querySelector('#map-container').style.opacity = 0;
+            document.querySelector('#desc-container').style.opacity = 0;
+        }
+
+        function fadeIn() {
+            document.querySelector('#map-container').style.opacity = 1;
+            document.querySelector('#desc-container').style.opacity = 1;
+        }
+    </script>
+</body>
+</html>

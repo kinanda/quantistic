@@ -219,3 +219,8 @@ def delete_sampling_project_page(request, project_id):
         message = "Project does not exist."
     messages.add_message(request, messages.INFO, message)
     return HttpResponseRedirect(reverse("dashboard:dashboard_page"))
+
+
+@login_required(login_url="/accounts/login/")
+def perasmian_page(request):
+    return render(request, "chatbot/perasmian.html")

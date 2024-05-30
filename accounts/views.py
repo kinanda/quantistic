@@ -50,7 +50,8 @@ def login_page(request):
 
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("dashboard:dashboard_page"))
+            #return HttpResponseRedirect(reverse("dashboard:dashboard_page"))
+            return HttpResponseRedirect(reverse("chatbot:perasmian_page")) #AISC09
         elif not User.objects.filter(username__iexact=username).exists():
             message = "Invalid username."
         else:

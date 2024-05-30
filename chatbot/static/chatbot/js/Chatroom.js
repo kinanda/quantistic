@@ -64949,7 +64949,7 @@ var speak = function speak(message, voiceLang) {
   toSpeak.voice = voices.find(function (voice) {
     return voice.lang === voiceLang;
   });
-  synth.speak(toSpeak);
+  // synth.speak(toSpeak); // #AISC09
 };
 
 var Message = function Message(_ref2) {
@@ -93332,7 +93332,8 @@ function (_Component) {
         ref: this.inputRef
       }), _react.default.createElement("input", {
         type: "submit",
-        value: "Submit"
+        // value: "Submit"
+        value: "✓" // #AISC09
       }), this.props.speechRecognition != null ? _react.default.createElement(_SpeechInput.default, {
         language: this.props.speechRecognition,
         onSpeechInput: function onSpeechInput(message) {
