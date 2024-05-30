@@ -18,3 +18,7 @@ cd C:\Users\Kinanda\Documents\Django\quantistic (replace with your quantistic pa
 .\env\Scripts\activate<br/>
 python .\manage.py runserver<br/><br/>
 - Access app via browser: http://127.0.0.1:8000/<br/><br/>
+
+# Optional: Packetriot command
+- Copy paste line by line into cmd:<br/><br/>
+C:\Users\Kinanda\Documents\Packetriot\pktriot.exe --config C:\Users\Kinanda\.pktriot\config.json start<br/><br/>
