@@ -1,6 +1,6 @@
 # Prerequisites
 - Install Python 3.8.x (manual installation; download and install at python website)<br/>
-- Install VSCode<br/><br/>
+- Install VSCode and open quantistic project folder, e.g.: C:\Users\Kinanda\Documents\Django\quantistic<br/><br/>
 
 # Setup: Install quantistic project (VSCode Terminal)
 - Copy paste line by line into terminal, wait until each command finish:<br/><br/>
