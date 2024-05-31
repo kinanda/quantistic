@@ -20,7 +20,7 @@
     <div class="perasmian-chat-container" id="chatContainer">
       <div class="chat-header">
         <div class="perasmian-bot-pic">
-          <img onclick="entot()" src="{% static 'chatbot/assets/bot-pic.png' %}">
+          <img onclick="startChatBot()" src="{% static 'chatbot/assets/bot-pic.png' %}">
         </div>
         <div class="perasmian-bot-name">AISYAH</div>
       </div>
@@ -92,7 +92,7 @@
     </script>
 
     <script>
-        function entot() {
+        function startChatBot() {
           const bot1 = "Mohon perkenan DYMM Tuanku Pemangku Raja Perlis untuk menaip singkatan nama \"AiSC09\" sebagai simbolik pembukaan.";
           setTimeout(() => {
             chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: bot1}));
