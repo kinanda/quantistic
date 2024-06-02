@@ -16,6 +16,7 @@ python manage.py createsuperuser<br/><br/>
 - Copy paste line by line into terminal, wait until each command finish:<br/><br/>
 cd C:\Users\Kinanda\Documents\Django\quantistic (replace with your quantistic path)<br/>
 .\env\Scripts\activate<br/>
+python .\manage.py collectstatic --no-input<br/>
 python .\manage.py runserver<br/><br/>
 - Access app via browser: http://127.0.0.1:8000/<br/><br/>
 
