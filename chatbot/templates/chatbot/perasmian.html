@@ -83,7 +83,7 @@
       var player;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('videoContainer', {
-          videoId: 'nlQC-6BDOSw',
+          videoId: 'G1XoJgAO_hY',
           playerVars: {
             'playsinline': 1
           },
@@ -93,15 +93,33 @@
 
     <script>
         function startChatBot() {
+          const bot0 = "Ampun Tuanku";
           const bot1 = "Mohon perkenan DYMM Tuanku Pemangku Raja Perlis untuk menaip singkatan nama \"AiSC09\" sebagai simbolik pembukaan.";
+
+          setTimeout(() => {
+            chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: bot0 + ','}));
+          }, 0);
+          setTimeout(() => {
+            var audio = new Audio("{% static 'chatbot/assets/bot0.wav' %}");
+            audio.play();
+          }, 1000);
+
           setTimeout(() => {
             chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: bot1}));
-          }, 0);
+          }, 2000);
           setTimeout(() => {
             var audio = new Audio("{% static 'chatbot/assets/bot1.wav' %}");
             audio.play();
             // document.querySelectorAll("input")[0].value = "AiSC09";
-          }, 1000);
+          }, 3000);
+
+          setTimeout(() => {
+            chatroom.ref.state.messageQueue.push(chatroom.ref.createNewBotMessage({type: 'text', text: bot0 + '.'}));
+          }, 12500);
+          setTimeout(() => {
+            var audio = new Audio("{% static 'chatbot/assets/bot0.wav' %}");
+            audio.play();
+          }, 13500);
         }
         
         const chatDiv = document.querySelector(".chats");
